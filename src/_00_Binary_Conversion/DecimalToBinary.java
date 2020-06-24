@@ -1,5 +1,7 @@
 package _00_Binary_Conversion;
 
+import javax.swing.JOptionPane;
+
 public class DecimalToBinary {
 	public static void main(String[] args) {
 		//Converting a decimal number to binary is a little trickier.
@@ -64,8 +66,9 @@ public class DecimalToBinary {
     
         do {
             // 1. Logical right shift by 1
-            int quotient = decimalNum >>> 1;
-        
+            int quotient = decimalNum >> 1;
+            System.out.println(quotient);
+            JOptionPane.showInputDialog("yes");
             // 2. Check remainder and add '1' or '0'
             if( decimalNum % 2 != 0 ){
                 binaryStr = '1' + binaryStr;
@@ -77,7 +80,7 @@ public class DecimalToBinary {
             
         // 3. Repeat until number is 0
         } while( decimalNum != 0 );
-        
+         
         return binaryStr;
     }
 }

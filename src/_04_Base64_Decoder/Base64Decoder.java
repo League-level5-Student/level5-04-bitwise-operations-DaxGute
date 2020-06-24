@@ -65,7 +65,7 @@ public class Base64Decoder {
 		int index = 0;
 		for (int i = 0; i < binaryVersion.length() ; i+=8) {
 			String subString = binaryVersion.substring(i, i+8);
-			System.out.println(subString);
+
 			int totalForIndex = 0;
 			for (int j = 0; j < 8; j++) {
 				totalForIndex += (Integer.parseInt(subString.substring(7-j, 8-j))*(Math.pow(2, j)));
@@ -76,11 +76,6 @@ public class Base64Decoder {
 			//}
 			index++;
 		}
-		System.out.println(binaryVersion);
-		System.out.println(finalBytes[0]);
-		System.out.println(finalBytes[1]);
-		System.out.println(finalBytes[2]);
-		System.out.println("");
 		return finalBytes;
 	}
 	public static String convertDecimalToBinary(int decimalNum) {
@@ -107,9 +102,19 @@ public class Base64Decoder {
 	//3. Complete this method so that it takes in a string of any length
 	//   and returns the full byte array of the decoded base64 characters.
 	public static byte[] base64StringToByteArray(String file) {
-		return null;
-	}
-	public static void main(String[] args) {
-		convert4CharsTo24Bits("////");
+		for (int i = 0; i < file.length()%4; i++) {
+			file = "A" + file;
+		}
+		int numModules = file.length()/4;
+		byte [] byteNum = new byte [numModules*3];
+		for (int i = 0; i < numModules; i++) {
+			byte [] tempModule = new byte [3];
+			tempModule = convert4CharsTo24Bits(file.substring(4*i, 4*(i+1)));
+			for (int j = 0; j < 3; j++) {
+				byteNum[(3*i) + j] = tempModule[j];
+				
+			}
+		}
+		return byteNum;
 	}
 }
